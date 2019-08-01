@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+
+	<typeAliases>
+		<!-- 给实体类SmbmsUser启用了一个别名  -->
+		<typeAlias alias="sbill" type="com.accp.pojo.SmbmsBill"/>
+		<typeAlias alias="sprovider" type="com.accp.pojo.SmbmsProvider"/>
+	</typeAliases>
+</configuration>

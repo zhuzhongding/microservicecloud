@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accp.dao.BizDao">
+	<!-- 用户登录验证 -->
+	<select id="validateUser" parameterType="java.util.HashMap" resultType="com.accp.pojo.SmbmsUser">
+		select * from smbms_user where usercode=#{name} and userpassword=#{pwd}
+	</select>
+	
+	<resultMap id="rmap" type="sbill">
+		<!-- 配置主键 -->
+		<id property="id" column="id"/>
+		<result property="billcode" column="billcode"/>
+		<result property="productname" column="productname"/>
+		<result property="totalprice" column="totalprice"/>
+		<result property="ispayment" column="ispayment"/>
+		<result property="creationdate" column="creationdate"/>
+		<!-- 在pojo SmbmsBill有一个类 ：SmbmsProvider 配置这种关系-->
+		<association property="spro" javaType="sprovider">
+			<id property="id" column="id"/>
+			<result property="proname" column="proname"/>
+		</association>
+	</resultMap>
+	
+	<!-- 多对一映射关系 -->
+	<select id="getAllBill" resultMap="rmap">
+		select a.id, a.billcode,a.productname,b.proname,a.totalprice,a.ispayment,a.creationdate 
+		from smbms_bill a
+		inner join smbms_provider b on a.providerid=b.id
+	</select>
+	
+	
+</mapper>
